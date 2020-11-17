@@ -1,0 +1,19 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include wh(100%, 100%);
+    background-color: #fff;
+    :global {
+        .am-input-item {
+            width: 80%;
+            margin: 0 20px;
+            margin-bottom: 10px;
+        }
+        .button {
+            width: 80%;
+            margin-top: 20px;
+        }
+    }
+}
