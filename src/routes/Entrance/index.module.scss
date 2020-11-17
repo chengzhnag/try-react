@@ -1,0 +1,13 @@
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include wh(100%, 100%);
+    color: red;
+    :global {
+        .like {
+            color: blue;
+        }
+    }
+}
