@@ -5,14 +5,35 @@
     justify-content: center;
     @include wh(100%, 100%);
     background-color: #fff;
+
     :global {
         .am-input-item {
             width: 80%;
             margin: 0 20px;
             margin-bottom: 10px;
+            border: 1px solid #ddd;
+
+            .am-list-line {
+                &::after {
+                    content: none !important;
+                }
+            }
+
+            &::before {
+                content: "*";
+                font-size: 16px;
+                color: rgb(240, 42, 42);
+                position: absolute;
+                left: 6px;
+                top: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
         }
+
         .button {
-            width: 80%;
+            width: calc(80% + 15px);
             margin-top: 20px;
         }
     }

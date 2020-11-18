@@ -3,7 +3,8 @@ import React from 'react'
 
 const BasicLayout = React.lazy(() => import(/* webpackChunkName: "BasicLayout" */ '@/layouts/BasicLayout'))
 
-// const Entrance = React.lazy(() => import(/* webpackChunkName: "Entrance" */ '@/routes/Entrance/index'))
+const Entrance = React.lazy(() => import(/* webpackChunkName: "Entrance" */ '@/routes/Entrance/index'))
+
 const Login = React.lazy(() => import(/* webpackChunkName: "Login" */ '@/routes/Login/index'))
 
 const PageNotFound = React.lazy(() => import(/* webpackChunkName: "PageNotFound" */ '@/components/PageNotFound/'))
@@ -17,11 +18,11 @@ const routes = [
         exact: true,
         component: Login
       },
-      /* {
-        path: '/login',
+      {
+        path: '/entrance',
         exact: false,
-        component: Login
-      }, */
+        component: Entrance
+      },
       /* {
         path: '/index',
         component: IndexLayout,
