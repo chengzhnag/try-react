@@ -1,0 +1,89 @@
+.index-box {
+  width: 100%;
+  height: 100%;
+  :global {
+    .content-same {
+      width: 100%;
+      height: calc(100% - 55px);
+      padding-top: 10px;
+      overflow: auto;
+
+      .tips {
+        display: flex;
+        flex: 1;
+        padding: 6px 20px;
+        align-items: center;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .alone {
+        display: flex;
+        flex: 1;
+        margin: 0 18px;
+        height: 90px;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #fff;
+        margin-bottom: 20px;
+        box-shadow: 4px 4px 1px #ececec;
+
+        .center {
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          justify-content: center;
+          height: 100%;
+          margin-left: 20px;
+
+          .name {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            color: #000;
+            margin-bottom: 6px;
+
+            .nums {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-width: 18px;
+              width: auto;
+              height: 18px;
+              margin-left: 6px;
+              color: #fff;
+              border-top-left-radius: 9px;
+              border-top-right-radius: 9px;
+              border-bottom-right-radius: 9px;
+              border-bottom-left-radius: 9px;
+              overflow: hidden;
+              background-color: red;
+              font-size: 13px;
+              line-height: 18px;
+              padding: 0 4px;
+            }
+          }
+
+          .desc {
+            font-size: 14px;
+            color: #333;
+            word-break: break-all;
+            white-space: pre-wrap;
+          }
+        }
+
+        .right {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 30px;
+          height: 100%;
+        }
+
+        &:active {
+          background-color: rgb(248, 248, 248);
+        }
+      }
+    }
+  }
+}

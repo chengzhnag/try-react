@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import "@/style/index.css";
 import Router from "@/router";
 import reportWebVitals from "@/reportWebVitals";
+import storage from '@/utils/localstorage.js';
+
+window._storage = storage;
+console.log(window._storage);
 
 ReactDOM.render(<Router />, document.getElementById("root"));
 
