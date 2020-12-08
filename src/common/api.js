@@ -1,4 +1,5 @@
 import request from '@/utils/request.js';
+import qs from 'qs';
 
 export const getData = query => {
 	console.log(query);
@@ -17,12 +18,9 @@ export const register = data => {
 	});
 };
 
-/*  */
-import qs from 'qs';
-
 // 封装一层统一设置请求域名
 const baseRequest = (params = {}) => {
-  if (params.method == 'post' && params.isFormData) {
+  if (params.method === 'post' && params.isFormData) {
     params.data = qs.stringify(params.data);
   }
   return request(

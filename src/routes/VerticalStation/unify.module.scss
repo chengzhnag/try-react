@@ -62,6 +62,7 @@
               font-size: 13px;
               line-height: 18px;
               padding: 0 4px;
+              line-height: 18px;
             }
           }
 
@@ -115,7 +116,7 @@
           flex-direction: column;
           justify-content: center;
           flex: 1;
-          padding: 10px 15px;
+          padding: 16px 15px;
           height: auto;
           background-color: #fff;
 
@@ -171,6 +172,107 @@
       }
       .active-btn {
         background-color: #2798df;
+      }
+    }
+  }
+}
+
+.addstation-box {
+  width: 100%;
+  height: 100%;
+  :global {
+    .content-box {
+      width: 100%;
+      height: calc(100% - 95px);
+      overflow: auto;
+      .am-list-item,
+      .am-input-item,
+      .am-textarea-label {
+        height: 56px;
+        line-height: 56px;
+      }
+      .am-list-item {
+        position: relative;
+        &::before {
+          content: "*";
+          position: absolute;
+          left: 7px;
+          top: 0;
+          font-size: 18px;
+          color: #ee0a24;
+        }
+      }
+      .am-textarea-item {
+        flex-direction: column;
+        height: auto;
+        .am-textarea-control {
+          width: 94%;
+          min-height: 100px;
+        }
+        .am-textarea-clear {
+          position: absolute;
+          right: 0;
+          bottom: calc(50% - 23px);
+          margin-top: 0;
+          margin-right: 8px;
+        }
+      }
+      .tips {
+        display: flex;
+        flex: 1;
+        padding: 10px 15px;
+        word-break: break-all;
+        font-size: 15px;
+        color: #666;
+        background-color: rgb(245, 245, 249);
+      }
+    }
+    .bottom-btn-box {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 50px;
+      background-color: #fff;
+
+      .cancel {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        height: 100%;
+        font-size: 16px;
+        color: #666;
+
+        &::after {
+          content: " ";
+          position: absolute;
+          right: 0;
+          top: calc(50% - 8px);
+          width: 0;
+          height: 16px;
+          border-right: 1px solid #eee;
+        }
+      }
+
+      .creact {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        height: 100%;
+        font-size: 16px;
+        color: #1aa5fe;
+      }
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        border-bottom: 1px solid #eee;
+        transform: scaleY(0.5);
       }
     }
   }

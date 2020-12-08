@@ -36,10 +36,7 @@ class Page extends Component {
     this.state = {
       dataSource,
       title: '待审核、未申请岗位',
-      tabs: [
-        { title: '待审核' },
-        { title: '未申请' }
-      ],
+      tabs: [],
       active: 0,
       searchValue: '',
       mid: 1,
@@ -57,12 +54,29 @@ class Page extends Component {
     return window._storage.read('_userinfo');
   }
   initData() {
+    let t = {
+      1: '我的岗位',
+      2: '待审核、未申请岗位',
+      4: '我创建、管理的岗位'
+    }
+    let _id = getQueryByField('id') * 1;
     this.setState({
-      mid: getQueryByField('id') * 1
+      mid: _id,
+      title: t[_id] || '我的岗位',
+      tabs: this.setTabsText(_id)
     }, () => {
       this.getData();
-      console.log(this.state.mid);
+      console.log(this.state.tabs);
     })
+  }
+  setTabsText(_id) {
+    let arr = [];
+    if (_id === 2) {
+      arr = ['待审核', '未申请']
+    } else if (_id === 4) {
+      arr = ['已完成匹配', '未完成匹配']
+    }
+    return arr.map(it => { return { title: it } })
   }
   getData() {
     this.funcRequest().then(res => {
@@ -70,9 +84,8 @@ class Page extends Component {
       if (this.state.page.page > 1) {
         _list = _list.concat(this.state.page.list);
       }
-      this.setState(
-        Object.assign({}, this.state.page, { list: _list, refreshing: false, isLoading: false, total: res.total || 0 })
-      , ()=> {
+      let _page = Object.assign({}, this.state.page, { list: _list, refreshing: false, isLoading: false, total: (res.total || 0) });
+      this.setState({ page: _page }, () => {
         console.log(this.state.page);
       })
       this.setState({
@@ -90,9 +103,9 @@ class Page extends Component {
         page: this.state.page.page, //页数
         text: this.state.searchValue //岗位搜索
       }
-      if (this.state.active) {
+      if (this.state.mid === 4) {
         if ([2, 4].includes(this.state.mid)) {
-          params.status = 0
+          params.status = this.state.active ? 0 : 1;
         }
         getMyCreateRole(params).then(res => {
           if (res.status === 1) {
@@ -107,7 +120,7 @@ class Page extends Component {
         })
       } else {
         if ([2, 4].includes(this.state.mid)) {
-          params.status = 1
+          params.status = this.state.active ? 0 : 1
         }
         getMyStationList(params).then(res => {
           if (res.status === 1) {
@@ -128,22 +141,33 @@ class Page extends Component {
       this.setState({
         active: index
       }, () => {
-        console.log(this.state.active);
+        this.listRefresh();
       })
     }
-    console.log(this.state.searchValue);
   }
   onChange(val) {
     this.setState({
       searchValue: val.replace(/\s/g, '')
     })
   }
+  searchSubmit() {
+    this.getData();
+  }
+  searchCancel() {
+    this.setState({
+      searchValue: ''
+    }, ()=> {
+      this.getData();
+    })
+  }
   addStation() {
-
+    this.props.history.push('addstation');
   }
   listRefresh() {
     this.setState(
-      Object.assign({}, this.state.page, { list: [], refreshing: true, isLoading: true, page: 1 }), () => {
+      {
+        page: Object.assign({}, this.state.page, { list: [], refreshing: true, isLoading: true, page: 1 })
+      }, () => {
         this.getData();
       })
   }
@@ -180,25 +204,29 @@ class Page extends Component {
         icon={<Icon onClick={() => this.props.history.go(-1)} size="lg" color="#333" type="left" />}
       >{this.state.title}</NavBar>
       <div className={this.state.mid === 4 ? 'content-box have-btn' : 'content-box'}>
-        <Tabs tabs={this.state.tabs}
-          initialPage={0}
-          className="tabs-box"
-          onTabClick={this.tabClick.bind(this)}
-        ></Tabs>
-        <SearchBar placeholder="请输入搜索关键词" value={this.state.searchValue} onChange={this.onChange.bind(this)} />
+        {
+          [2, 4].includes(this.state.mid) ? (
+            <Tabs tabs={this.state.tabs}
+              initialPage={0}
+              className="tabs-box"
+              onTabClick={this.tabClick.bind(this)}
+            ></Tabs>
+          ) : null
+        }
+        <SearchBar placeholder="请输入搜索关键词" value={this.state.searchValue} onCancel={this.searchCancel.bind(this)} onSubmit={this.searchSubmit.bind(this)} onChange={this.onChange.bind(this)} />
         {
           <div className={[2, 4].includes(this.state.mid) ? 'scroll-box have-tab' : 'scroll-box'}>
             <ListView
               className="list-scroll"
               dataSource={this.state.dataSource}
               renderFooter={() => (
-              <div className="footer">
-                {
-                  this.state.page.list && !this.state.page.list.length ? (
-                    <NotData tips="暂无数据"></NotData>
-                  ) : (this.state.page.isLoading ? '加载中...' : '暂无更多数据')
-                }
-              </div>)}
+                <div className="footer">
+                  {
+                    !this.state.page.list.length ? (
+                      <NotData tips="暂无数据"></NotData>
+                    ) : (this.state.page.isLoading ? '加载中...' : '暂无更多数据')
+                  }
+                </div>)}
               renderRow={row}
               useBodyScroll
               pullToRefresh={<PullToRefresh
@@ -207,7 +235,6 @@ class Page extends Component {
               />}
               onEndReachedThreshold={10}
               onEndReached={this.onEndReached}
-              pageSize={5}
             />
           </div>
         }

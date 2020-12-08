@@ -133,7 +133,9 @@ class Page extends Component {
                 <div className="center">
                   <span className="name">{item['name']}
                     {
-                      <span style={{ display: (item['id'] === 3 && this.state.auditNum) ? 'block' : 'none' }} className="nums">{this.state.auditNum}</span>
+                      item['id'] === 3 && this.state.auditNum ? (
+                        <span className="nums">{this.state.auditNum}</span>
+                      ) : null
                     }
                   </span>
                   <span className="desc">{item['desc']}</span>
