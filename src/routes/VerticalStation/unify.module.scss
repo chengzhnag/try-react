@@ -1,6 +1,7 @@
 .index-box {
   width: 100%;
   height: 100%;
+
   :global {
     .content-same {
       width: 100%;
@@ -93,23 +94,30 @@
 .list-box {
   width: 100%;
   height: 100%;
+
   :global {
     .content-box {
       width: 100%;
       height: calc(100% - 45px);
+
       .am-tabs {
         height: auto;
       }
+
       .scroll-box {
         width: 100%;
         height: calc(100% - 44px);
         overflow: auto;
+
         .list-scroll {
           height: 100%;
+
           .am-pull-to-refresh-content-wrapper {
             min-height: 100%;
+            overflow: inherit;
           }
         }
+
         .like {
           position: relative;
           display: flex;
@@ -131,6 +139,7 @@
             color: #ccc;
             word-break: break-all;
           }
+
           &::after {
             content: " ";
             position: absolute;
@@ -142,6 +151,7 @@
             transform: scaleY(0.5);
           }
         }
+
         .footer {
           text-align: center;
         }
@@ -151,10 +161,12 @@
         height: calc(100% - 88px);
       }
     }
+
     .have-btn {
       width: 100%;
       height: calc(100% - 105px);
     }
+
     .btn-box {
       display: flex;
       justify-content: center;
@@ -170,6 +182,7 @@
         background-color: #1aa5fe;
         color: #fff;
       }
+
       .active-btn {
         background-color: #2798df;
       }
@@ -180,19 +193,23 @@
 .addstation-box {
   width: 100%;
   height: 100%;
+
   :global {
     .content-box {
       width: 100%;
       height: calc(100% - 95px);
       overflow: auto;
+
       .am-list-item,
       .am-input-item,
       .am-textarea-label {
         height: 56px;
         line-height: 56px;
       }
+
       .am-list-item {
         position: relative;
+
         &::before {
           content: "*";
           position: absolute;
@@ -202,13 +219,16 @@
           color: #ee0a24;
         }
       }
+
       .am-textarea-item {
         flex-direction: column;
         height: auto;
+
         .am-textarea-control {
           width: 94%;
           min-height: 100px;
         }
+
         .am-textarea-clear {
           position: absolute;
           right: 0;
@@ -217,6 +237,11 @@
           margin-right: 8px;
         }
       }
+
+      .am-list-extra {
+        flex-basis: 44%;
+      }
+
       .tips {
         display: flex;
         flex: 1;
@@ -227,6 +252,7 @@
         background-color: rgb(245, 245, 249);
       }
     }
+
     .bottom-btn-box {
       position: relative;
       display: flex;
@@ -264,6 +290,120 @@
         font-size: 16px;
         color: #1aa5fe;
       }
+
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        border-bottom: 1px solid #eee;
+        transform: scaleY(0.5);
+      }
+    }
+  }
+}
+
+.audit-box {
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .content-box {
+      width: 100%;
+      height: calc(100% - 95px);
+
+      .am-checkbox-item {
+        height: 48px;
+      }
+
+      .scroll-box {
+        width: 100%;
+        height: calc(100% - 92px);
+        overflow: auto;
+
+
+        .list-scroll {
+          height: 100%;
+
+          .am-pull-to-refresh-content-wrapper {
+            min-height: 100%;
+            overflow: inherit;
+          }
+
+          .footer {
+            text-align: center;
+          }
+        }
+
+        .am-checkbox-item {
+          height: auto;
+        }
+
+        .am-checkbox {
+          height: auto !important;
+
+          .am-checkbox-inner {
+            top: calc(50% - 10px) !important;
+          }
+        }
+
+        .like {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          padding: 10px 0;
+
+          span {
+            font-size: 14px;
+            color: #333;
+            line-height: 20px;
+            word-break: break-all;
+            white-space: normal;
+          }
+        }
+      }
+    }
+
+    .bottom-btn-box {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 50px;
+      background-color: #fff;
+
+      .refuse {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        height: 100%;
+        font-size: 16px;
+        color: #ff6c6e;
+
+        &::after {
+          content: " ";
+          position: absolute;
+          right: 0;
+          top: calc(50% - 8px);
+          width: 0;
+          height: 16px;
+          border-right: 1px solid #eee;
+        }
+      }
+
+      .pass {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        height: 100%;
+        font-size: 16px;
+        color: #1aa5fe;
+      }
+
       &::after {
         content: " ";
         position: absolute;
